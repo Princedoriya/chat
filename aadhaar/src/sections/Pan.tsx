@@ -20,11 +20,20 @@ const PanVerificationForm: React.FC = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
+    const { name, value, type } = e.target;
+    
+    if (type === "checkbox") {
+      const target = e.target as HTMLInputElement;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: target.checked,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const validateForm = () => {
@@ -113,7 +122,7 @@ const PanVerificationForm: React.FC = () => {
               <option value="proprietorship">Proprietorship</option>
               <option value="partnership">Partnership</option>
               <option value="company">Company</option>
-              <option value="company">Self</option>
+              <option value="self">Self</option>
               <option value="others">Others</option>
             </select>
             {errors.typeOfOrganisation && (
