@@ -1,9 +1,15 @@
 "use client";
 import { useState } from "react";
 
+interface Item {
+  text: string;
+  correctCategory?: string;
+  selectedCategory?: string;
+}
+
 export default function CategorizeEditor({ data, onChange }: any) {
   const [categories, setCategories] = useState<string[]>(data.categories || ["Category 1"]);
-  const [items, setItems] = useState<{ text: string; correctCategory?: string }[]>(data.items || []);
+  const [items, setItems] = useState<Item[]>(data.items || []);
 
   function addCategory() {
     const name = `Category ${categories.length + 1}`;
@@ -17,9 +23,9 @@ export default function CategorizeEditor({ data, onChange }: any) {
     onChange({ categories, items: it });
   }
 
-  function updateItem(i: number, key: string, value: any) {
+  function updateItem(i: number, key: keyof Item, value: any) {
     const cp = [...items];
-    (cp[i] as any)[key] = value;
+    cp[i] = { ...cp[i], [key]: value };
     setItems(cp);
     onChange({ categories, items: cp });
   }
