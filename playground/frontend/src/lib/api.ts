@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:4000";
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE || "https://playground-11.onrender.com";
 
 export const getProfile = async (email: string) =>
   axios.get(`${API_BASE}/profile`, { params: { email } }).then(r => r.data);
