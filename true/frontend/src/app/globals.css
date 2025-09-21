@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@theme {
+  --color-brand-background: #F9FAFB;
+  --color-brand-primary: #4F46E5;
+  --color-brand-secondary: #6366F1;
+}
+
+body { 
+  @apply bg-brand-background text-gray-900;
+}
